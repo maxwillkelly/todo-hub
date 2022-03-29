@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -22,11 +23,8 @@ const CreateTodoItemDialog = ({
   open,
   ...other
 }: Props) => {
-  // useState is used to remember the state of objects between component renders in react
-  const [todoItem, setTodoItem] = useState<TodoItem>({
-    title: "",
-    description: "",
-  });
+  // useForm is used to hold the state of the form and perform validation
+  const { control, handleSubmit, reset } = useForm<TodoItem>();
 
   return (
     <>
@@ -34,15 +32,12 @@ const CreateTodoItemDialog = ({
         open={open}
         {...other}
         TransitionProps={{
-          onExiting: () => setTodoItem({ title: "", description: "" }),
+          onExiting: () => reset(),
         }}
       >
         <DialogTitle>Create a new todo item</DialogTitle>
         <DialogContent>
-          <TodoItemForm
-            todoItem={todoItem}
-            onChange={(updatedTodoItem) => setTodoItem(updatedTodoItem)}
-          ></TodoItemForm>
+          <TodoItemForm control={control}></TodoItemForm>
         </DialogContent>
 
         <DialogActions>
@@ -50,7 +45,7 @@ const CreateTodoItemDialog = ({
           <Button
             variant="contained"
             color="primary"
-            onClick={() => onSave(todoItem)}
+            onClick={handleSubmit(onSave)}
           >
             Save
           </Button>
