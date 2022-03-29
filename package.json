@@ -18,10 +18,12 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-hook-form": "^7.28.1"
+    "react-hook-form": "^7.28.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.10",
+    "@types/uuid": "^8.3.4",
     "typescript": "^4.1.2"
   }
 }
