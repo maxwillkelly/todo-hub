@@ -9,6 +9,7 @@ import Container from "@mui/material/Container";
 import TodoList from "../src/components/todoItem/list/TodoList";
 import CreateTodoItemDialog from "../src/components/todoItem/create/CreateTodoItemDialog";
 import { TodoItem } from "../src/components/todoItem/TodoItem";
+import RemoveTodoItemDialog from "../src/components/todoItem/remove/RemoveTodoItemDialog";
 
 // this is the main page of the application, it is not expected that you would need another page
 const Index = () => {
@@ -34,12 +35,19 @@ const Index = () => {
     setTodoItems(todosCopy);
   };
 
+  const removeTodoItem = (todoItem: TodoItem) => {
+    setTodoItems((oldItems) =>
+      oldItems.filter((item) => item.id !== todoItem.id)
+    );
+  };
+
   return (
     <Container>
       <TodoList
         sx={{ mt: 2 }}
         todoItems={todoItems}
         toggleTodoAsCompleted={toggleTodoAsCompleted}
+        removeTodoItem={removeTodoItem}
       ></TodoList>
       <Tooltip title="Create new todo item">
         <Fab
