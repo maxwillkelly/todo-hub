@@ -28,7 +28,6 @@ const TodoItemCard = ({ todoItem, toggleTodoAsCompleted }: Props) => {
             sx: { textDecoration: completed && "line-through" },
           }}
         ></CardHeader>
-        <pre>{JSON.stringify(todoItem, null, 2)}</pre>
       </Card>
     </CardActionArea>
   );
