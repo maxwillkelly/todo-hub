@@ -15,12 +15,19 @@ import TodoItemCard from "../TodoItemCard";
 interface Props {
   sx?: SxProps<Theme>;
   todoItems: TodoItem[];
+  editTodoItem: (todoItem: TodoItem) => void;
   toggleTodoAsCompleted: (todoItem: TodoItem) => void;
   removeTodoItem: (removeTodoItem: TodoItem) => void;
 }
 
 // This component renders the list of todo items as well as anything else in the context of a todo list
-const TodoList = ({ sx = [], todoItems, toggleTodoAsCompleted, removeTodoItem }: Props) => {
+const TodoList = ({
+  sx = [],
+  todoItems,
+  editTodoItem,
+  toggleTodoAsCompleted,
+  removeTodoItem,
+}: Props) => {
   const todoItemsCount = todoItems?.length || 0;
 
   return (
@@ -44,6 +51,7 @@ const TodoList = ({ sx = [], todoItems, toggleTodoAsCompleted, removeTodoItem }:
             <Grid key={index} item xs={12} sm={6} md={3}>
               <TodoItemCard
                 todoItem={todoItem}
+                editTodoItem={editTodoItem}
                 toggleTodoAsCompleted={toggleTodoAsCompleted}
                 removeTodoItem={removeTodoItem}
               ></TodoItemCard>
