@@ -35,6 +35,15 @@ const Index = () => {
     setTodoItems(todosCopy);
   };
 
+  const editTodoItem = (todoItem: TodoItem) => {
+    setTodoItems((oldItems) => {
+      const todoItemsCopy = [...oldItems];
+      const index = todoItemsCopy.findIndex((item) => item.id === todoItem.id);
+      todoItemsCopy[index] = todoItem;
+      return todoItemsCopy;
+    });
+  };
+
   const removeTodoItem = (todoItem: TodoItem) => {
     setTodoItems((oldItems) =>
       oldItems.filter((item) => item.id !== todoItem.id)
@@ -47,6 +56,7 @@ const Index = () => {
         sx={{ mt: 2 }}
         todoItems={todoItems}
         toggleTodoAsCompleted={toggleTodoAsCompleted}
+        editTodoItem={editTodoItem}
         removeTodoItem={removeTodoItem}
       ></TodoList>
       <Tooltip title="Create new todo item">
