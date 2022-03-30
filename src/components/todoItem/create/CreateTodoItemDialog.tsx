@@ -24,7 +24,11 @@ const CreateTodoItemDialog = ({
   ...other
 }: Props) => {
   // useForm is used to hold the state of the form and perform validation
-  const { control, handleSubmit, reset } = useForm<TodoItem>();
+  const { control, handleSubmit, reset } = useForm<TodoItem>({
+    defaultValues: {
+      completed: false,
+    },
+  });
 
   return (
     <>

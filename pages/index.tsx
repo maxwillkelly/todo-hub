@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
 
 import Fab from "@mui/material/Fab";
 import Tooltip from "@mui/material/Tooltip";
@@ -18,6 +19,7 @@ const Index = () => {
 
   // this function shows how to safely mutate a state, in this case adding an item
   const addTodoItem = (todoItem) => {
+    todoItem.id = uuid();
     // append the new todo to the end of the todo list
     setTodoItems((oldItems) => {
       return [...oldItems, todoItem];
@@ -25,9 +27,20 @@ const Index = () => {
     setCreateTodoDialogOpen(false);
   };
 
+  const toggleTodoAsCompleted = (todoItem: TodoItem) => {
+    const todosCopy = [...todoItems];
+    const todo = todosCopy.find((item) => item.id === todoItem.id);
+    todo.completed = !todo.completed;
+    setTodoItems(todosCopy);
+  };
+
   return (
     <Container>
-      <TodoList sx={{ mt: 2 }} todoItems={todoItems}></TodoList>
+      <TodoList
+        sx={{ mt: 2 }}
+        todoItems={todoItems}
+        toggleTodoAsCompleted={toggleTodoAsCompleted}
+      ></TodoList>
       <Tooltip title="Create new todo item">
         <Fab
           sx={(theme) => ({
